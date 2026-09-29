@@ -1,0 +1,526 @@
+<title>Florença Store</title>
+<style>
+  :root {
+    --bg: #F4E9DA;
+    --surface: #FFFDF9;
+    --surface-alt: #EBDCC7;
+    --ink: #241C15;
+    --ink-soft: #5C4A38;
+    --gold: #A9793B;
+    --gold-bright: #C89A54;
+    --rose: #C48A80;
+    --contrast-bg: #241C15;
+    --contrast-text: #F4E9DA;
+    --contrast-text-soft: #D8C4AC;
+    --border: rgba(169,121,59,0.35);
+    --font-display: 'Italiana', 'Times New Roman', serif;
+    --font-quote: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Jost', 'Century Gothic', 'Futura', sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17110C;
+      --surface: #221A13;
+      --surface-alt: #1D1610;
+      --ink: #F1E4D2;
+      --ink-soft: #C9B7A0;
+      --gold: #C9A15C;
+      --gold-bright: #E0BC7C;
+      --rose: #D19C90;
+      --contrast-bg: #0E0A07;
+      --contrast-text: #F1E4D2;
+      --contrast-text-soft: #C9B7A0;
+      --border: rgba(201,161,92,0.4);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #17110C;
+    --surface: #221A13;
+    --surface-alt: #1D1610;
+    --ink: #F1E4D2;
+    --ink-soft: #C9B7A0;
+    --gold: #C9A15C;
+    --gold-bright: #E0BC7C;
+    --rose: #D19C90;
+    --contrast-bg: #0E0A07;
+    --contrast-text: #F1E4D2;
+    --contrast-text-soft: #C9B7A0;
+    --border: rgba(201,161,92,0.4);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 76px;
+  }
+
+  @media (min-width: 641px) {
+    body { padding-bottom: 0; }
+  }
+
+  img { max-width: 100%; display: block; }
+
+  a { color: inherit; }
+
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 0.9rem;
+  }
+
+  .section {
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+    padding-inline: 1.5rem;
+  }
+
+  .section-inner {
+    max-width: 640px;
+    margin-inline: auto;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 1.6rem 0;
+  }
+  .ornament span { width: 28px; height: 1px; background: var(--gold); opacity: 0.6; }
+  .ornament i { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #FFFDF9;
+  }
+  .btn-primary:hover { background: var(--gold-bright); }
+
+  .btn-outline {
+    background: transparent;
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+  .btn-outline:hover { background: var(--surface-alt); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink-soft);
+    padding: 0.85rem 0.4rem;
+  }
+  .btn-ghost:hover { color: var(--gold); }
+
+  .btn-on-dark {
+    border-color: var(--gold-bright);
+    color: var(--contrast-text);
+  }
+  .btn-on-dark:hover { background: rgba(255,255,255,0.06); }
+
+  /* HERO */
+  .hero {
+    padding-block: clamp(3rem, 10vw, 5.5rem) clamp(3rem, 8vw, 4.5rem);
+    padding-inline: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-logo-crop {
+    width: min(240px, 66vw);
+    aspect-ratio: 2.05 / 1;
+    overflow: hidden;
+    animation: rise 0.7s ease both;
+  }
+
+  .hero-logo-crop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .hero-name {
+    margin-top: 1.6rem;
+    font-size: clamp(2.3rem, 8vw, 3.2rem);
+    letter-spacing: 0.02em;
+    animation: rise 0.7s ease 0.08s both;
+  }
+
+  .hero-sub {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    animation: rise 0.7s ease 0.14s both;
+  }
+
+  .hero-tagline {
+    margin-top: 1.3rem;
+    font-family: var(--font-quote);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--ink);
+    max-width: 30ch;
+    animation: rise 0.7s ease 0.2s both;
+  }
+
+  .hero-verse {
+    margin-top: 1rem;
+    font-family: var(--font-quote);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    max-width: 32ch;
+    animation: rise 0.7s ease 0.26s both;
+  }
+
+  .hero-ctas {
+    margin-top: 2.1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    animation: rise 0.7s ease 0.32s both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SOBRE */
+  .sobre { background: var(--surface-alt); }
+  .sobre .section-inner { text-align: left; }
+  .sobre h2 { font-size: clamp(1.7rem, 5vw, 2.2rem); margin-bottom: 1.1rem; }
+  .sobre p { color: var(--ink-soft); font-size: 1.02rem; max-width: 58ch; }
+  .rule-left {
+    width: 44px; height: 2px; background: var(--gold); margin-bottom: 1.4rem;
+  }
+
+  /* CATEGORIAS */
+  .categorias .section-inner { max-width: 900px; text-align: center; }
+  .cat-grid {
+    margin-top: 2.4rem;
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .cat-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .cat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.1rem 1.4rem;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .cat-card:hover { transform: translateY(-3px); }
+  .cat-card svg { width: 44px; height: 44px; color: var(--gold); }
+  .cat-card h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin: 1rem 0 0.5rem;
+  }
+  .cat-card p { margin: 0; font-size: 0.9rem; color: var(--ink-soft); }
+
+  /* CONTRAST BAND (WhatsApp) */
+  .band-dark {
+    background: var(--contrast-bg);
+    color: var(--contrast-text);
+    text-align: center;
+  }
+  .band-dark h2 { font-size: clamp(1.8rem, 6vw, 2.4rem); color: var(--contrast-text); }
+  .band-dark p { color: var(--contrast-text-soft); margin: 0.9rem auto 1.8rem; max-width: 42ch; }
+  .band-dark .ornament span { background: var(--gold-bright); }
+  .band-dark .ornament i { background: var(--gold-bright); }
+
+  /* LOCALIZACAO */
+  .local .section-inner {
+    max-width: 900px;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .local .section-inner { grid-template-columns: 1.1fr 0.9fr; align-items: center; }
+  }
+  .local-copy { text-align: left; }
+  .local-copy h2 { font-size: clamp(1.7rem, 5vw, 2.2rem); margin-bottom: 1rem; }
+  .local-copy address { font-style: normal; color: var(--ink-soft); margin-bottom: 1.5rem; line-height: 1.7; }
+  .pin-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    text-align: center;
+  }
+  .pin-box svg { width: 40px; height: 40px; color: var(--gold); }
+
+  /* HORARIO */
+  .horario { background: var(--surface-alt); text-align: center; }
+  .horario .section-inner { max-width: 480px; }
+  .hours-list { list-style: none; padding: 0; margin: 2rem 0 0; }
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.98rem;
+  }
+  .hours-list li:last-child { border-bottom: none; }
+  .hours-list span:first-child { color: var(--ink-soft); }
+  .hours-list span:last-child { font-variant-numeric: tabular-nums; }
+
+  /* REDES */
+  .redes { text-align: center; }
+  .social-row {
+    margin-top: 1.8rem;
+    display: flex;
+    gap: 0.9rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--contrast-bg);
+    color: var(--contrast-text-soft);
+    padding: 3rem 1.5rem 2.2rem;
+    text-align: center;
+  }
+  footer .foot-name {
+    font-family: var(--font-display);
+    color: var(--contrast-text);
+    font-size: 1.5rem;
+  }
+  footer .foot-tag { font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 0.4rem; }
+  .foot-icons {
+    margin: 1.6rem 0;
+    display: flex;
+    gap: 0.9rem;
+    justify-content: center;
+  }
+  .icon-btn {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-bright);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s ease;
+  }
+  .icon-btn:hover { background: rgba(255,255,255,0.08); }
+  .icon-btn svg { width: 19px; height: 19px; color: var(--contrast-text); }
+  footer .foot-addr { font-size: 0.85rem; max-width: 34ch; margin: 0 auto 1.2rem; line-height: 1.6; }
+  footer .foot-copy { font-size: 0.78rem; opacity: 0.7; }
+
+  /* STICKY MOBILE CTA */
+  .sticky-cta {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    z-index: 20;
+  }
+  .sticky-cta .btn { width: 100%; justify-content: center; }
+  @media (min-width: 641px) {
+    .sticky-cta { display: none; }
+  }
+</style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital@1&family=Jost:wght@300;400;500;600&display=swap">
+
+<header class="hero" id="inicio">
+  <div class="hero-logo-crop">
+    <img src="logo.jpg" alt="Logo da Florença Store — monograma FS dourado com ramo floral">
+  </div>
+  <h1 class="hero-name">Florença Store</h1>
+  <p class="hero-sub">Moda Feminina · Masculina · Acessórios</p>
+  <p class="hero-tagline">Roupas com alma, escolhidas para você.</p>
+  <p class="hero-verse">&ldquo;O Senhor é meu Pastor; nada me faltará.&rdquo; — Salmos 23:1</p>
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href="https://wa.me/5594992849064?text=Ol%C3%A1!%20Vim%20pelo%20Instagram%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20Floren%C3%A7a%20Store." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L4 7 a2 2 0 0 1 2 -2 h12 a2 2 0 0 1 2 2 v8 a2 2 0 0 1 -2 2 H9 l-5 4 Z"/></svg>
+      Falar no WhatsApp
+    </a>
+    <a class="btn btn-outline" href="#categorias">Ver catálogo</a>
+    <a class="btn btn-ghost" href="#redes">Instagram</a>
+  </div>
+</header>
+
+<main>
+  <section class="section sobre" id="sobre">
+    <div class="section-inner">
+      <div class="rule-left" aria-hidden="true"></div>
+      <p class="eyebrow">Sobre a loja</p>
+      <h2>Uma boutique de bairro, com jeito de família</h2>
+      <p>A Florença Store nasceu do cuidado da Dayane em ajudar cada cliente a se sentir bem numa peça nova. Aqui você encontra moda feminina, masculina e acessórios escolhidos com atenção — sempre com aquele atendimento de quem conhece você pelo nome, do jeitinho de loja de bairro.</p>
+    </div>
+  </section>
+
+  <section class="section categorias" id="categorias">
+    <div class="section-inner">
+      <p class="eyebrow">O que você encontra aqui</p>
+      <h2>Nossas categorias</h2>
+      <div class="cat-grid">
+        <div class="cat-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 L18 12 L14 18 L10 40 L38 40 L34 18 L30 12 L30 6" />
+            <path d="M18 6 Q24 10 30 6" />
+          </svg>
+          <h3>Moda Feminina</h3>
+          <p>Vestidos, blusas e peças para todos os estilos e ocasiões.</p>
+        </div>
+        <div class="cat-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8 L10 12 L8 40 L18 40 L20 22 L24 30 L28 22 L30 40 L40 40 L38 12 L32 8 L24 14 Z" />
+            <path d="M16 8 L24 14 L32 8" />
+          </svg>
+          <h3>Moda Masculina</h3>
+          <p>Camisas, calças e peças para o dia a dia e ocasiões especiais.</p>
+        </div>
+        <div class="cat-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="10" y="18" width="28" height="22" rx="4" />
+            <path d="M16 18 V12 a8 8 0 0 1 16 0 v6" />
+          </svg>
+          <h3>Acessórios</h3>
+          <p>Bolsas, bijuterias e detalhes que completam o look.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band-dark" id="fale-conosco">
+    <div class="section-inner">
+      <h2>Gostou de alguma peça?</h2>
+      <div class="ornament" aria-hidden="true"><span></span><i></i><span></span></div>
+      <p>Fale com a gente pelo WhatsApp e a gente ajuda você a encontrar exatamente o que procura.</p>
+      <a class="btn btn-primary" href="https://wa.me/5594992849064?text=Ol%C3%A1!%20Vim%20pelo%20Instagram%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20Floren%C3%A7a%20Store." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L4 7 a2 2 0 0 1 2 -2 h12 a2 2 0 0 1 2 2 v8 a2 2 0 0 1 -2 2 H9 l-5 4 Z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <section class="section local" id="localizacao">
+    <div class="section-inner">
+      <div class="local-copy">
+        <div class="rule-left" aria-hidden="true"></div>
+        <p class="eyebrow">Venha nos visitar</p>
+        <h2>Onde estamos</h2>
+        <address>
+          Avenida Vergília Rosa, esquina com Rua Isaías Mota, nº 04<br>
+          Bairro Jardim América
+        </address>
+        <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&query=Avenida%20Verg%C3%ADlia%20Rosa,%20esquina%20com%20Rua%20Isa%C3%ADas%20Mota,%20n%C2%BA%2004,%20Bairro%20Jardim%20Am%C3%A9rica" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21 C12 21 5 14 5 9 a7 7 0 0 1 14 0 C19 14 12 21 12 21 Z"/><circle cx="12" cy="9" r="2.3"/></svg>
+          Como chegar
+        </a>
+      </div>
+      <div class="pin-box" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21 C12 21 5 14 5 9 a7 7 0 0 1 14 0 C19 14 12 21 12 21 Z"/><circle cx="12" cy="9" r="2.3"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="section horario" id="horario">
+    <div class="section-inner">
+      <p class="eyebrow">Funcionamento</p>
+      <h2>Horário de atendimento</h2>
+      <ul class="hours-list">
+        <li><span>Segunda a sexta</span><span>09h — 18h</span></li>
+        <li><span>Sábado</span><span>09h — 13h</span></li>
+        <li><span>Domingo</span><span>Fechado</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section redes" id="redes">
+    <div class="section-inner">
+      <p class="eyebrow">Nas redes</p>
+      <h2>Acompanhe nossas novidades</h2>
+      <div class="social-row">
+        <a class="btn btn-outline" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="4"/><path d="M8 6 L9.5 3.5 h5 L16 6"/></svg>
+          Instagram
+        </a>
+        <a class="btn btn-outline" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12 H21 M12 3 a15 15 0 0 1 0 18 M12 3 a15 15 0 0 0 0 18"/></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot-name">Florença Store</div>
+  <p class="foot-tag">Moda Feminina · Masculina · Acessórios</p>
+  <div class="foot-icons">
+    <a class="icon-btn" href="https://wa.me/5594992849064" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L4 7 a2 2 0 0 1 2 -2 h12 a2 2 0 0 1 2 2 v8 a2 2 0 0 1 -2 2 H9 l-5 4 Z"/></svg>
+    </a>
+    <a class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="4"/><path d="M8 6 L9.5 3.5 h5 L16 6"/></svg>
+    </a>
+    <a class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12 H21 M12 3 a15 15 0 0 1 0 18 M12 3 a15 15 0 0 0 0 18"/></svg>
+    </a>
+  </div>
+  <p class="foot-addr">Avenida Vergília Rosa, esquina com Rua Isaías Mota, nº 04 — Bairro Jardim América</p>
+  <p class="foot-copy">© 2026 Florença Store — Dayane Almeida</p>
+</footer>
+
+<div class="sticky-cta">
+  <a class="btn btn-primary" href="https://wa.me/5594992849064?text=Ol%C3%A1!%20Vim%20pelo%20Instagram%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20Floren%C3%A7a%20Store." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L4 7 a2 2 0 0 1 2 -2 h12 a2 2 0 0 1 2 2 v8 a2 2 0 0 1 -2 2 H9 l-5 4 Z"/></svg>
+    Falar no WhatsApp
+  </a>
+</div>

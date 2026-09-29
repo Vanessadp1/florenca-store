@@ -13,6 +13,7 @@
     --contrast-text: #F4E9DA;
     --contrast-text-soft: #D8C4AC;
     --border: rgba(169,121,59,0.35);
+    --logo-shadow: rgba(36,28,21,0.2);
     --font-display: 'Italiana', 'Times New Roman', serif;
     --font-quote: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'Jost', 'Century Gothic', 'Futura', sans-serif;
@@ -33,6 +34,7 @@
       --contrast-text: #F1E4D2;
       --contrast-text-soft: #C9B7A0;
       --border: rgba(201,161,92,0.4);
+      --logo-shadow: rgba(0,0,0,0.45);
     }
   }
 
@@ -49,6 +51,7 @@
     --contrast-text: #F1E4D2;
     --contrast-text-soft: #C9B7A0;
     --border: rgba(201,161,92,0.4);
+    --logo-shadow: rgba(0,0,0,0.45);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -162,9 +165,11 @@
   }
 
   .hero-logo-crop {
-    width: min(172px, 48vw);
-    aspect-ratio: 1.26 / 1;
-    overflow: hidden;
+    width: min(196px, 54vw);
+    aspect-ratio: 421 / 363;
+    -webkit-mask-image: radial-gradient(ellipse 62% 62% at 50% 41%, #000 52%, transparent 100%);
+    mask-image: radial-gradient(ellipse 62% 62% at 50% 41%, #000 52%, transparent 100%);
+    filter: drop-shadow(0 10px 20px var(--logo-shadow));
     animation: rise 0.7s ease both;
   }
 
@@ -172,7 +177,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
     filter: contrast(1.08) saturate(1.06);
   }
 
